@@ -1,0 +1,68 @@
+## Day 1: Introduction to Database Systems
+
+### 1. What is a Database?
+
+- A **database** is an organized collection of data, typically stored and accessed electronically from a computer system.
+- It is designed to manage large amounts of information efficiently, ensuring data integrity, security, and accessibility.
+- Examples: Student records in a university, product inventory in an e-commerce platform.
+
+### 2. What is a Database Management System (DBMS)?
+
+- A **DBMS** is software that interacts with users, applications, and the database to capture and analyze data.
+- It provides an interface to define, create, query, update, and administer databases.
+- Popular DBMS examples: MySQL, PostgreSQL, Oracle, Microsoft SQL Server, MongoDB (NoSQL).
+
+### 3. DBMS Architecture
+
+The architecture of a DBMS can be viewed in terms of its **three-schema architecture** (also called the ANSI/SPARC architecture), which separates the user view from the physical storage.
+
+#### a. External Schema (View Level)
+
+- Represents the user’s view of the database.
+- Different users or applications may see different subsets or formats of the data.
+- Example: A student sees only their grades, while a professor sees all student grades.
+
+#### b. Conceptual Schema (Logical Level)
+
+- Defines the logical structure of the entire database.
+- Includes entities, relationships, constraints, and data types, independent of physical storage.
+- Example: A university database may define entities like `Student`, `Course`, and `Enrollment` with their attributes and relationships.
+
+#### c. Internal Schema (Physical Level)
+
+- Describes the physical storage structure of the database.
+- Includes details like file organization, indexes, and storage allocation.
+- Example: How `Student` records are stored on disk or indexed for faster retrieval.
+
+#### Key Points:
+
+- The three-schema architecture ensures **data independence**:
+  - **Logical data independence**: Changes to the conceptual schema (e.g., adding a new attribute) do not affect external schemas.
+  - **Physical data independence**: Changes to the internal schema (e.g., changing storage format) do not affect the conceptual schema.
+
+### 4. Advantages of DBMS
+
+- **Data Integrity and Consistency**: Enforces constraints (e.g., primary keys, foreign keys) to maintain accurate data.
+- **Data Security**: Access control mechanisms restrict unauthorized access.
+- **Concurrent Access**: Supports multiple users accessing the database simultaneously with transaction management.
+- **Data Abstraction**: Hides complex storage details from users, providing a simplified view.
+- **Efficient Data Retrieval**: Uses query optimization for fast data access.
+- **Backup and Recovery**: Provides mechanisms to recover data after failures.
+- **Scalability**: Handles large datasets and growing user demands.
+
+### 5. Types of Databases
+
+- **Relational Databases**: Use tables (relations) with rows and columns (e.g., MySQL, PostgreSQL).
+- **NoSQL Databases**: Handle unstructured or semi-structured data (e.g., MongoDB, Cassandra).
+- **Hierarchical Databases**: Organize data in a tree-like structure (e.g., IBM IMS).
+- **Network Databases**: Use graph-like structures (less common today).
+- **Object-Oriented Databases**: Integrate object-oriented programming concepts.
+
+### 6. Key Terminology
+
+- **Entity**: A real-world object (e.g., Student, Course).
+- **Attribute**: A property of an entity (e.g., Student’s `name`, `ID`).
+- **Relation**: A table in a relational database.
+- **Primary Key**: A unique identifier for a record in a table.
+- **Foreign Key**: A field in one table that uniquely identifies a row in another table, establishing relationships.
+- **Query**: A request for data or action (e.g., SQL `SELECT` statement).
