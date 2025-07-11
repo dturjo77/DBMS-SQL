@@ -1,0 +1,68 @@
+## Day 3: Understanding the ER Model
+
+### 1. What is the ER Model?
+
+- The **Entity-Relationship (ER) Model** is a conceptual modeling approach used to design databases by representing real-world objects and their relationships.
+- It provides a visual way to describe the structure of a database using **ER diagrams (ERDs)**.
+- The ER model is used during the **conceptual design phase** to create a high-level blueprint before implementing a database in a DBMS.
+
+### 2. Components of the ER Model
+
+#### a. Entities
+
+- An **entity** is a real-world object or concept about which data is stored (e.g., Student, Book, Patient).
+- Entities are represented as **rectangles** in ERDs.
+- **Types**:
+  - **Strong Entity**: Has a primary key and does not depend on other entities (e.g., `Student` with `StudentID`).
+  - **Weak Entity**: Depends on another entity (its owner) and does not have a unique primary key (e.g., `Dependent` of an `Employee`).
+
+#### b. Attributes
+
+- **Attributes** are properties or characteristics of an entity (e.g., `StudentID`, `Name`, `Email` for a `Student`).
+- Represented as **ovals** connected to their entity in ERDs.
+- **Types**:
+  - **Simple**: Cannot be divided (e.g., `Age`).
+  - **Composite**: Can be divided into subparts (e.g., `Name` = `FirstName` + `LastName`).
+  - **Single-valued**: Has one value per entity (e.g., `StudentID`).
+  - **Multi-valued**: Can have multiple values (e.g., `PhoneNumber`, denoted with a double oval).
+  - **Derived**: Computed from other attributes (e.g., `Age` derived from `BirthDate`, denoted with a dashed oval).
+  - **Key Attribute**: Uniquely identifies an entity (e.g., `StudentID`, underlined in ERDs).
+
+#### c. Relationships
+
+- A **relationship** describes how entities are associated (e.g., a `Student` enrolls in a `Course`).
+- Represented as **diamonds** in ERDs, connecting related entities.
+- **Types**:
+  - **Binary**: Involves two entities (e.g., `Student`–`Course`).
+  - **Ternary**: Involves three entities (e.g., `Student`–`Course`–`Professor`).
+  - **Recursive**: An entity relates to itself (e.g., `Employee` supervises another `Employee`).
+
+#### d. Cardinality
+
+- **Cardinality** specifies the number of instances of one entity that can or must be associated with each instance of another entity in a relationship.
+- Represented by constraints on the edges connecting entities to relationships.
+- **Types**:
+  - **One-to-One (1:1)**: One instance of entity A relates to exactly one instance of entity B (e.g., `Person`–`Passport`).
+  - **One-to-Many (1:N)**: One instance of entity A relates to multiple instances of entity B (e.g., `Department`–`Employee`).
+  - **Many-to-One (N:1)**: Multiple instances of entity A relate to one instance of entity B (e.g., `Employee`–`Department`).
+  - **Many-to-Many (M:N)**: Multiple instances of entity A relate to multiple instances of entity B (e.g., `Student`–`Course`).
+- **Participation Constraints**:
+  - **Total Participation**: Every instance of an entity must participate in the relationship (denoted by a double line).
+  - **Partial Participation**: Some instances may not participate (denoted by a single line).
+
+### 3. ER Diagram Notations
+
+- **Chen Notation** (commonly used):
+  - Entities: Rectangles.
+  - Attributes: Ovals (key attributes underlined).
+  - Relationships: Diamonds.
+  - Cardinality: Labels (e.g., 1:N) or crow’s foot notation.
+- **Crow’s Foot Notation**:
+  - Uses symbols to indicate cardinality (e.g., a crow’s foot for "many").
+  - More compact and widely used in modern tools.
+
+### 4. Tools for Creating ERDs
+
+- **Lucidchart**: A cloud-based diagramming tool with ERD templates and collaboration features.
+- **Draw.io (diagrams.net)**: A free, browser-based tool integrated with cloud storage (Google Drive, OneDrive).
+- Both tools support drag-and-drop interfaces to create entities, attributes, and relationships with proper notations.
