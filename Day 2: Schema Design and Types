@@ -1,0 +1,198 @@
+## Day 2: Schema Design and Types
+
+### 1. Schema Types
+
+A **schema** is a blueprint of the database that defines how data is organized and related. There are three main types of schemas corresponding to the DBMS architecture:
+
+#### a. Conceptual Schema
+
+- Represents the overall logical structure of the database.
+- Focuses on entities, their attributes, and relationships.
+- Independent of any specific DBMS or storage details.
+- Example: For a university, the conceptual schema might include:
+  - Entities: `Student`, `Course`, `Professor`.
+  - Relationships: `Student enrolls in Course`, `Professor teaches Course`.
+  - Attributes: `Student.ID`, `Student.Name`, `Course.Code`, `Course.Title`.
+
+#### b. Logical Schema
+
+- Translates the conceptual schema into a specific DBMS model (e.g., relational model).
+- Defines tables, columns, data types, constraints, and relationships.
+- Example (Relational Model):
+  - `Student` table: Columns (`ID`, `Name`, `Email`).
+  - `Course` table: Columns (`Code`, `Title`, `Credits`).
+  - `Enrollment` table: Columns (`StudentID`, `CourseCode`, `Grade`), with foreign keys linking to `Student` and `Course`.
+
+#### c. Physical Schema
+
+- Specifies how data is stored on disk or other storage media.
+- Includes details like indexes, partitioning, and file formats.
+- Example: The `Student` table might use a B-tree index on `ID` for faster queries, stored in a specific file format.
+
+### 2. Schema Design Process
+
+Designing a database schema involves translating real-world requirements into a structured format. Steps include:
+
+1. **Identify Entities**: Determine the main objects (e.g., Student, Course, Order, Product).
+2. **Define Attributes**: List properties of each entity (e.g., Student’s `Name`, `ID`).
+3. **Establish Relationships**: Identify how entities are related (e.g., Student enrolls in Course).
+4. **Apply Constraints**: Ensure data integrity with primary keys, foreign keys, and other rules.
+5. **Normalize**: Organize data to eliminate redundancy and ensure consistency (e.g., using 1NF, 2NF, 3NF).
+6. **Create Schema**: Represent the design in conceptual, logical, and physical schemas.
+
+### 3. Practice: Schema for a University System
+
+Let’s design a simple schema for a university system, covering students, courses, and enrollments.
+
+#### a. Conceptual Schema
+
+- **Entities and Attributes**:
+  - **Student**: `StudentID` (unique), `Name`, `Email`, `Major`.
+  - **Course**: `CourseCode` (unique), `Title`, `Credits`, `Department`.
+  - **Enrollment**: `StudentID`, `CourseCode`, `Grade`, `Semester`.
+- **Relationships**:
+  - A `Student` enrolls in multiple `Courses`.
+  - A `Course` can have multiple `Students` enrolled.
+  - `Enrollment` links `Student` and `Course`.
+
+#### b. Logical Schema (Relational Model)
+
+- **Tables**:
+  - `Student`:
+    - `StudentID` (Primary Key, Integer)
+    - `Name` (Varchar)
+    - `Email` (Varchar)
+    - `Major` (Varchar)
+  - `Course`:
+    - `CourseCode` (Primary Key, Varchar)
+    - `Title` (Varchar)
+    - `Credits` (Integer)
+    - `Department` (Varchar)
+  - `Enrollment`:
+    - `StudentID` (Foreign Key referencing `Student`, Integer)
+    - `CourseCode` (Foreign Key referencing `Course`, Varchar)
+    - `Grade` (Varchar)
+    - `Semester` (Varchar)
+    - Composite Primary Key: (`StudentID`, `CourseCode`, `Semester`)
+
+#### c. Physical Schema (Example)
+
+- `Student` table stored with a B-tree index on `StudentID`.
+- `Enrollment` table partitioned by `Semester` for faster queries on recent data.
+- Data stored in a compressed format to save disk space.
+
+#### Diagram (Text-Based Representation)
+
+```
+Student                  Course
++----------------+       +----------------+
+| StudentID (PK) |<----->| CourseCode (PK)|
+| Name           |       | Title          |
+| Email          |       | Credits        |
+| Major          |       | Department     |
++----------------+       +----------------+
+         ^
+         |
+         |
+Enrollment
++---------------------+
+| StudentID (FK)      |
+| CourseCode (FK)     |
+| Grade               |
+| Semester            |
+| (PK: StudentID,     |
+|      CourseCode,    |
+|      _
+
+Semester) |
++---------------------+
+```
+
+### 4. Practice: Schema for an E-Commerce System
+
+Let’s design a schema for an e-commerce system, covering customers, products, and orders.
+
+#### a. Conceptual Schema
+
+- **Entities and Attributes**:
+  - **Customer**: `CustomerID` (unique), `Name`, `Email`, `Address`.
+  - **Product**: `ProductID` (unique), `Name`, `Price`, `Stock`.
+  - **Order**: `OrderID` (unique), `CustomerID`, `OrderDate`, `TotalAmount`.
+  - **OrderDetail**: `OrderID`, `ProductID`, `Quantity`, `Subtotal`.
+- **Relationships**:
+  - A `Customer` places multiple `Orders`.
+  - An `Order` contains multiple `Products` (via `OrderDetail`).
+  - A `Product` can appear in multiple `Orders`.
+
+#### b. Logical Schema (Relational Model)
+
+- **Tables**:
+  - `Customer`:
+    - `CustomerID` (Primary Key, Integer)
+    - `Name` (Varchar)
+    - `Email` (Varchar)
+    - `Address` (Varchar)
+  - `Product`:
+    - `ProductID` (Primary Key, Integer)
+    - `Name` (Varchar)
+    - `Price` (Decimal)
+    - `Stock` (Integer)
+  - `Order`:
+    - `OrderID` (Primary Key, Integer)
+    - `CustomerID` (Foreign Key referencing `Customer`, Integer)
+    - `OrderDate` (Date)
+    - `TotalAmount` (Decimal)
+  - `OrderDetail`:
+    - `OrderID` (Foreign Key referencing `Order`, Integer)
+    - `ProductID` (Foreign Key referencing `Product`, Integer)
+    - `Quantity` (Integer)
+    - `Subtotal` (Decimal)
+    - Composite Primary Key: (`OrderID`, `ProductID`)
+
+#### c. Physical Schema (Example)
+
+- `Product` table indexed on `ProductID` and `Name` for fast searches.
+- `Order` table partitioned by `OrderDate` for efficient querying of recent orders.
+- Use a clustered index on `OrderDetail` for faster joins with `Order` and `Product`.
+
+#### Diagram (Text-Based Representation)
+
+```
+Customer                 Product
++----------------+       +----------------+
+| CustomerID (PK)|       | ProductID (PK) |
+| Name           |       | Name           |
+| Email          |       | Price          |
+| Address        |       | Stock          |
++----------------+       +----------------+
+         ^                       ^
+         |                       |
+Order    |                       | OrderDetail
++----------------+       +---------------------+
+| OrderID (PK)   |       | OrderID (FK)        |
+| CustomerID (FK)|<----->| ProductID (FK)      |
+| OrderDate      |       | Quantity            |
+| TotalAmount    |       | Subtotal            |
+|                |       | (PK: OrderID,       |
+|                |       |      ProductID)     |
++----------------+       +---------------------+
+```
+
+---
+
+## Key Takeaways
+
+- **DBMS** manages databases, providing data abstraction, security, and efficiency.
+- **Three-Schema Architecture** (External, Conceptual, Internal) ensures data independence.
+- **Schema Types**:
+  - **Conceptual**: High-level logical design.
+  - **Logical**: DBMS-specific structure (e.g., tables, constraints).
+  - **Physical**: Storage-level details.
+- **Schema Design** involves identifying entities, attributes, relationships, and constraints, followed by normalization.
+- Practice designing schemas for real-world systems like universities or e-commerce platforms to solidify understanding.
+
+## Recommended Next Steps
+
+- Explore SQL basics to query the designed schemas.
+- Study normalization (1NF, 2NF, 3NF) to refine schema designs.
+- Implement the schemas in a DBMS like MySQL or PostgreSQL for hands-on practice.
