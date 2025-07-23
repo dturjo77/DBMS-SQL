@@ -4,7 +4,7 @@ These notes provide a comprehensive overview of the Entity-Relationship (ER) mod
 
 ---
 
-## Day 3: Understanding the ER Model
+## Understanding the ER Model
 
 ### 1. What is the ER Model?
 
@@ -75,7 +75,7 @@ These notes provide a comprehensive overview of the Entity-Relationship (ER) mod
 
 ---
 
-## Day 4: ERD Design and Conversion to Relational Schemas
+## ERD Design and Conversion to Relational Schemas
 
 ### 1. Steps to Create an ERD
 
