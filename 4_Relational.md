@@ -1,10 +1,10 @@
-# Day 5-6: Relational Model Notes
+# Relational Model Notes
 
 These notes provide a comprehensive overview of the Relational Model for Day 5-6, focusing on relations, keys (primary, foreign), integrity constraints, practice exercises, and interview preparation. The content covers studying the relational model, writing 5-10 relational schemas with constraints, and solving LeetCode SQL problems (e.g., "Combine Two Tables"). The notes are detailed, actionable, and designed to support both theoretical understanding and practical application.
 
 ---
 
-## Day 5: Understanding the Relational Model
+## Understanding the Relational Model
 
 ### 1. What is the Relational Model?
 
@@ -107,7 +107,7 @@ Student(StudentID Integer PRIMARY KEY, Name Varchar(50) NOT NULL, Email Varchar(
 
 ---
 
-## Day 6: Practice and Interview Preparation
+## Practice and Interview Preparation
 
 ### 1. Practice: Writing Relational Schemas with Constraints
 
